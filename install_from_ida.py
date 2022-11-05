@@ -49,7 +49,7 @@ else:
 def temp_file_as_stdout():
     ida_stdout = sys.stdout
     try:
-        with tempfile.TemporaryFile("w+") as f:
+        with tempfile.TemporaryFile("wb+") as f:
             sys.stdout = f
             yield
             f.seek(0)
@@ -121,7 +121,7 @@ ida_python_rc_path = os.path.join(idaapi.get_user_idadir(), "idapythonrc.py")
 rc_file_content = ""
 
 if os.path.exists(ida_python_rc_path):
-    with open(ida_python_rc_path, "r") as rc:
+    with open(ida_python_rc_path, "rb") as rc:
         rc_file_content = rc.read()
 
 if "# BEGIN IPyIDA loading" in rc_file_content:
